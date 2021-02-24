@@ -1,0 +1,110 @@
+
+.personal {
+    background: #52ce69;
+    height: 20vh;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+
+.notes {
+    height: 90%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33% 67%;
+}
+
+.confirm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.confirm button {
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.closed {
+    display: none;
+}
+
+.end {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+
+label {
+    text-align: center;
+    align-content: center;
+    height: 45%;
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    
+    margin-left: .9em;
+    margin-right: .9em;
+    margin-bottom: 1.2em;
+    
+    border-right:  .3em solid transparent;
+    border-bottom: .7em  solid #FFF;
+    border-left:   .3em solid transparent;
+  
+    /* Controlls the size of the stars. */
+    font-size: 24px;
+}
+    .star:before, .star:after {
+      content: '';
+      
+      display: block;
+      width: 0;
+      height: 0;
+      
+      position: absolute;
+      top: .6em;
+      left: -1em;
+    
+      border-right:  1em solid transparent;
+      border-bottom: .7em  solid #FFF;
+      border-left:   1em solid transparent;
+    
+      transform: rotate(-35deg);
+    }
+    
+    .star:after {  
+      transform: rotate(35deg);
+    }
+
+    .fav {
+        border-bottom: .7em  solid #F80;
+    }
+
+    .fav:before, .fav:after {
+        border-bottom: .7em  solid #F80;
+    }
+
+    .favorite {
+        display: inline-block;
+        justify-self: flex-end;
+    }

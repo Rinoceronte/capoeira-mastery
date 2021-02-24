@@ -1,0 +1,1 @@
+INSERT INTO notes (user_id, move_id, notes) VALUES ($1, $2, $3) returning *;

@@ -1,0 +1,1 @@
+UPDATE notes SET favorite = $3 WHERE user_id = $1 AND move_id = $2;

@@ -1,0 +1,18 @@
+.list {
+    width: 15%;
+    height: 100%;
+}
+
+.list ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+li {
+    color: #6d863e;
+    list-style: none;
+    margin-right: 30px;
+    margin-top: 10px;
+    cursor:pointer;
+}

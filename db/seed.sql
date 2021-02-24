@@ -1,0 +1,9 @@
+-- DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS moves;
+-- DROP TABLE IF EXISTS favorites;
+
+-- CREATE TABLE users (id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL, password VARCHAR NOT NULL, first_name VARCHAR(50), last_name VARCHAR(50), email VARCHAR(50) NOT NULL);
+
+-- CREATE TABLE moves (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, video VARCHAR NOT NULL, description VARCHAR NOT NULL);
+
+-- CREATE TABLE notes (id SERIAL PRIMARY KEY, user_id INT NOT NULL, move_id INT NOT NULL, notes VARCHAR, favorite BOOLEAN CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id), CONSTRAINT fk_move FOREIGN KEY(move_id) REFERENCES moves(id));

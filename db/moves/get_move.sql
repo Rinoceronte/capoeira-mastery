@@ -1,0 +1,1 @@
+SELECT * FROM moves WHERE id = $1;

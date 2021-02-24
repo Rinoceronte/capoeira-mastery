@@ -1,0 +1,1 @@
+SELECT * from notes WHERE user_id = $1 AND move_id = $2;

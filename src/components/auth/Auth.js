@@ -26,9 +26,9 @@ const Auth = () => {
     }, []);
 
     const checkEmail = () => {
-           var pattern = new RegExp("^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$");
-          
-           return pattern.test(user.email);
+        var pattern = new RegExp("^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$");
+
+        return pattern.test(user.email);
     }
 
     const checkPassword = () => {
@@ -135,28 +135,28 @@ const Auth = () => {
             </section> : <section className="auth"><button onClick={logout}>Logout</button> <Link to='/user'><h3>Change</h3></Link></section>}
             {trylogin && <div className='loginform'>
                             <label className='close' onClick={e => {setTryLogin(false); setReg(false);}}>X</label>
-                            <section className='user row'><label>Username: <input type='text' onChange={e => alterUser('username', e.target.value)} value={user.username} placeholder='username'/></label>
+                            <section className='user row'><label className='form'><span>Username: </span><input type='text' onChange={e => alterUser('username', e.target.value)} value={user.username} /></label>
                             {user.username == '' ? <p className='wrong'>Input a username</p> : <p className='wrong'></p> }</section>
-                            <section className='user row'><label>Password: <input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} placeholder='password'/></label>
+                            <section className='user row'><label className='form'><span>Password:</span><input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} /></label>
                             {user.password == '' ? <p className='wrong'>Input a password</p> : <p className='wrong'></p>}</section>
                             <button onClick={login}>LOGIN</button>
-                         </div>}
+                        </div>}
             {reg && <div className='loginform'>
                             <label className='close' onClick={e => {setTryLogin(false); setReg(false);}}>X</label>
-                            <section className='user row'><label><span>Username:</span> <input type='text' onChange={e => alterUser('username', e.target.value)} value={user.username} placeholder='username'/></label>
-                            {regErrors.username ? <p className='wrong'>Input a username</p> : <p className='wrong'></p>}</section>
-                            <section className='pass row'><label><span>Password:</span> <input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} placeholder='password'/></label>
-                            {regErrors.password ? <p className='wrong'>Password must be 8 characters with 1 capital 1 special character and 1 number</p> : <p className='wrong'></p>}</section>
-                            <section className='ver row'><label><span>Verify:</span> <input type='password' onChange={e => alterUser('verpassword', e.target.value)} value ={user.verpassword} placeholder='verify password'/></label>
-                            {comparePasswords() ? <p className='wrong'></p> : <p className='wrong'>Passwords do not match</p>}</section>
-                            <section className='first row'><label><span>First Name:</span> <input type='text' onChange={e => alterUser('first_name', e.target.value)} value={user.first_name} placeholder='first name'/></label>
-                            {regErrors.first ? <p className='wrong'>Please input a first name</p> : <p className='wrong'></p>}</section>
-                            <section className='last row'><label><span>Last Name:</span> <input type='text' onChange={e => alterUser('last_name', e.target.value)} value={user.last_name} placeholder='last name'/></label>
-                            {regErrors.last ? <p className='wrong'>Please input a last name</p> : <p className='wrong'></p>}</section>
-                            <section className='email row'><label><span>Email:</span> <input type='text' onChange={e => alterUser('email', e.target.value)} value={user.email} placeholder='email'/></label>
-                            {regErrors.email ? <p className='wrong'>Please input a valid email</p> : <p className='wrong'></p>}</section>
+                            <section className='user row'><label className='form'><span>Username:</span> <input type='text' onChange={e => alterUser('username', e.target.value)} value={user.username} /></label>
+                            {regErrors.username ? <span className='wrong'>Input a username</span> : <span className='wrong'></span>}</section>
+                            <section className='pass row'><label className='form'><span>Password:</span> <input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} /></label>
+                            {regErrors.password ? <span className='wrong'>Enter a strong password</span> : <span className='wrong'></span>}</section>
+                            <section className='ver row'><label className='form'><span>Verify:</span> <input type='password' onChange={e => alterUser('verpassword', e.target.value)} value ={user.verpassword} /></label>
+                            {comparePasswords() ? <span className='wrong'></span> : <span className='wrong'>Passwords do not match</span>}</section>
+                            <section className='first row'><label className='form'><span>First Name:</span> <input type='text' onChange={e => alterUser('first_name', e.target.value)} value={user.first_name} /></label>
+                            {regErrors.first ? <span className='wrong'>Please input a first name</span> : <span className='wrong'></span>}</section>
+                            <section className='last row'><label className='form'><span>Last Name:</span> <input type='text' onChange={e => alterUser('last_name', e.target.value)} value={user.last_name} /></label>
+                            {regErrors.last ? <span className='wrong'>Please input a last name</span> : <span className='wrong'></span>}</section>
+                            <section className='email row'><label className='form'><span>Email:</span> <input type='text' onChange={e => alterUser('email', e.target.value)} value={user.email} /></label>
+                            {regErrors.email ? <span className='wrong'>Please input a valid email</span> : <span className='wrong'></span>}</section>
                             <button onClick={() => register()}>REGISTER</button>
-                         </div>}
+                        </div>}
         </div>
     )
 }

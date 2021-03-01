@@ -18,8 +18,10 @@ function App() {
         <div className='content'>
             <Switch>
               <Route path='/' exact>
-                <MoveList />
-                <Video />
+                <div className="main">
+                  <MoveList />
+                  <Video />
+                </div>
                 <Desc />
               </Route>
               <Route path='/user' component={User} />

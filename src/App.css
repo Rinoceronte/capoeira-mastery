@@ -13,7 +13,10 @@
 
 .App {
   text-align: center;
-  color: #BA181B;
+  color: black;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
 }
 
 * {
@@ -22,21 +25,27 @@
 }
 
 body {
-  /* overflow: hidden; */
-  background: #009c3c;
+  overflow: hidden;
+  background: rgb(233, 227, 227);
 }
 
 header {
   width: 100vw;
-  background: #006c0c;
-  height: 12vh;
+  background: #000049;
+  height: 8vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 header h1 {
   margin: 0 auto;
-  color: black;
+  color: white;
+}
+
+header a {
+  width: 10vw;
+  text-decoration: none;
 }
 
 .content {
@@ -48,4 +57,23 @@ header h1 {
 
 .collapse {
   display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
 }

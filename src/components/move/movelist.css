@@ -1,4 +1,6 @@
 .list {
+    width: 20vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -26,7 +28,6 @@ li {
     .menu {
         justify-self: flex-start;
         display: inline-block !important;
-        
     }
 
     .menu-close{
@@ -62,8 +63,18 @@ li {
         position: absolute;
         top: 8vh;
         left: 1vw;
-        background-color: #454fa6;
-        opacity: 0.5;
+        justify-content: flex-start;
+        /* background-color: #52ce69; */
+        opacity: 1;
     }
 
+    .MuiTreeView-root {
+        margin-left: -50% !important;
+    }
+
+}
+@media only screen and (max-width: 459px) {
+    .MuiTreeItem-label {
+        font-size: 0.6rem !important;
+    }
 }

@@ -2,7 +2,8 @@ const initialState = {
     username: '',
     first_name: '',
     last_name: '',
-    email: ''
+    email: '',
+    profile_pic: ''
 }
 
 export default function reducer(state = initialState, action)

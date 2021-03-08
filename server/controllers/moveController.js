@@ -10,6 +10,15 @@ const getMoves = async (req, res) => {
     }
 }
 
+const getFavMoves = async (req, res) => {
+    let db = req.app.get('db');
+    const results = await db.moves.get_fav_moves(req.session.user.id);
+    if(results) {
+        return res.status(200).send(results);
+    }
+    return res.sendStatus(500);
+}
+
 const getMove = async (req, res) => {
     let db = req.app.get('db');
 
@@ -31,13 +40,14 @@ const favMove = (req, res) => {
     }).catch(err => {
         console.log(err);
         res.sendStatus(500);
-    });
-   
+    }); 
 }
+
 
 
 module.exports = {
     getMoves,
+    getFavMoves,
     getMove,
     favMove
 }

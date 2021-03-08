@@ -4,6 +4,11 @@ import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateUser, logout} from './state/actions';
 import {updateNotes} from '../personal/state/actions';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import HowToRegIcon from '@material-ui/icons/HowToReg';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
@@ -18,6 +23,7 @@ const Auth = () => {
     const [reg, setReg] = useState(false);
     const [user, setUser] = useState({username: '', password: '', verpassword: '', first_name: '', last_name: '', email: ''})
     const [regErrors, setRegErrors] = useState({username: false, password: false, verpassword: false, first: false, last: false, email: false});
+    const [open, setOpen] = useState(false);
 
 
 
@@ -51,11 +57,11 @@ const Auth = () => {
     }
 
     const login = () => {
+        console.log('login')
         let u = checkUser();
-        // push('/');
         setRegErrors({username: !u, password: false, verpassword: false, first: false, last: false, email: false});
 
-        if(u && user.password != '')
+        if(user.username != '' && user.password != '')
         {
             axios.post('/api/auth/login', {username: user.username, password: user.password})
             .then(res => {
@@ -65,11 +71,15 @@ const Auth = () => {
                 setUser({username: '', password: '', verpassword: '', first_name: '', last_name: '', email: ''});
                 // setLoggedInUser(res.data);
                 setRegErrors({username: false, password: false, verpassword: false, first: false, last: false, email: false});
-            }).catch(err => console.log(err));
+            }).catch(err => {
+                setOpen(true);
+                console.log(err)
+            });
         }
     }
 
     const register = () => {
+        console.log('register')
         let u = checkUser();
         let p = checkPassword();
         let vp = comparePasswords();
@@ -129,33 +139,34 @@ const Auth = () => {
 
     return (
         <div>
+            <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={open} onClose={() => setOpen(false)} message='Incorrect username or password.' autoHideDuration={2000}/>
             {userInfo.username == '' || !userInfo.username ? <section className='auth'>
-                <button onClick={e => {setTryLogin(!trylogin); setReg(false);}}>Login</button>
-                <button onClick={e => {setReg(!reg); setTryLogin(false);}}>Register</button>
-            </section> : <section className="auth"><button onClick={logout}>Logout</button> <Link to='/user'><h3>Change</h3></Link></section>}
-            {trylogin && <div className='loginform'>
+                <button onClick={e => {setTryLogin(!trylogin); setReg(false);}}><span className='phone'><VpnKeyIcon /></span><span className='computer'>Login</span></button>
+                <button onClick={e => {setReg(!reg); setTryLogin(false);}}><span className='phone'><HowToRegIcon /></span><span className='computer'>Register</span></button>
+            </section> : <section className="auth"><Link to="/"><button onClick={logout} className='logout' ><span className='phone'><ExitToAppIcon /></span><span className='computer'>Logout</span></button></Link> <Link to='/user'><AccountCircleIcon className='profile'/></Link></section>}
+            {trylogin && <div className='loginform log'>
                             <label className='close' onClick={e => {setTryLogin(false); setReg(false);}}>X</label>
-                            <section className='user row'><label className='form'><span>Username: </span><input type='text' onChange={e => alterUser('username', e.target.value)} value={user.username} /></label>
+                            <section className='user row'><label className='form'><span>Username: </span><input type='text' autoFocus onChange={e => alterUser('username', e.target.value)} value={user.username} onKeyPress={e => {if(e.key === 'Enter') {login()}}}/></label>
                             {user.username == '' ? <p className='wrong'>Input a username</p> : <p className='wrong'></p> }</section>
-                            <section className='user row'><label className='form'><span>Password:</span><input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} /></label>
+                            <section className='user row'><label className='form'><span>Password:</span><input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} onKeyPress={e => {if(e.key === 'Enter') {login()}}} /></label>
                             {user.password == '' ? <p className='wrong'>Input a password</p> : <p className='wrong'></p>}</section>
                             <button onClick={login}>LOGIN</button>
                         </div>}
             {reg && <div className='loginform'>
                             <label className='close' onClick={e => {setTryLogin(false); setReg(false);}}>X</label>
-                            <section className='user row'><label className='form'><span>Username:</span> <input type='text' onChange={e => alterUser('username', e.target.value)} value={user.username} /></label>
+                            <section className='user row'><label className='form'><span>Username:</span> <input type='text' autoFocus onChange={e => alterUser('username', e.target.value)} value={user.username} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {regErrors.username ? <span className='wrong'>Input a username</span> : <span className='wrong'></span>}</section>
-                            <section className='pass row'><label className='form'><span>Password:</span> <input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} /></label>
+                            <section className='pass row'><label className='form'><span>Password:</span> <input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {regErrors.password ? <span className='wrong'>Enter a strong password</span> : <span className='wrong'></span>}</section>
-                            <section className='ver row'><label className='form'><span>Verify:</span> <input type='password' onChange={e => alterUser('verpassword', e.target.value)} value ={user.verpassword} /></label>
+                            <section className='ver row'><label className='form'><span>Verify:</span> <input type='password' onChange={e => alterUser('verpassword', e.target.value)} value ={user.verpassword} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {comparePasswords() ? <span className='wrong'></span> : <span className='wrong'>Passwords do not match</span>}</section>
-                            <section className='first row'><label className='form'><span>First Name:</span> <input type='text' onChange={e => alterUser('first_name', e.target.value)} value={user.first_name} /></label>
+                            <section className='first row'><label className='form'><span>First Name:</span> <input type='text' onChange={e => alterUser('first_name', e.target.value)} value={user.first_name} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {regErrors.first ? <span className='wrong'>Please input a first name</span> : <span className='wrong'></span>}</section>
-                            <section className='last row'><label className='form'><span>Last Name:</span> <input type='text' onChange={e => alterUser('last_name', e.target.value)} value={user.last_name} /></label>
+                            <section className='last row'><label className='form'><span>Last Name:</span> <input type='text' onChange={e => alterUser('last_name', e.target.value)} value={user.last_name} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {regErrors.last ? <span className='wrong'>Please input a last name</span> : <span className='wrong'></span>}</section>
-                            <section className='email row'><label className='form'><span>Email:</span> <input type='text' onChange={e => alterUser('email', e.target.value)} value={user.email} /></label>
+                            <section className='email row'><label className='form'><span>Email:</span> <input type='text' onChange={e => alterUser('email', e.target.value)} value={user.email} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {regErrors.email ? <span className='wrong'>Please input a valid email</span> : <span className='wrong'></span>}</section>
-                            <button onClick={() => register()}>REGISTER</button>
+                            <button onClick={() => register()}>Register</button>
                         </div>}
         </div>
     )

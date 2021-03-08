@@ -1,6 +1,8 @@
 .vid {
     width: 60vw;
     height: 60vh;
+    justify-self: flex-end;
+    align-self: center;
 }
 
 .video {

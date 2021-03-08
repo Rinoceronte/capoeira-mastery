@@ -4,3 +4,10 @@ export const changeMove = (move) => {
         payload: move
     }
 }
+
+export const saveMoves = (moves) => {
+    return {
+        type: 'SAVE_MOVES',
+        payload: moves
+    }
+}

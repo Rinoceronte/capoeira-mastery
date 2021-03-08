@@ -35,6 +35,7 @@ app.post('/api/auth/logout', authCtrl.logout);
 app.post('/api/auth/update', auth.usersOnly, authCtrl.updateUser);
 
 app.get('/api/moves', moveCtrl.getMoves);
+app.get('/api/moves/favs', auth.usersOnly, moveCtrl.getFavMoves)
 app.get('/api/move/:id', moveCtrl.getMove)
 app.post('/api/moves/favorite/:id', auth.usersOnly, moveCtrl.favMove);
 

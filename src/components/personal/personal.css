@@ -1,6 +1,6 @@
 
 .personal {
-    background: #454fa6;
+    background: #000049;
     height: 20vh;
     position: absolute;
     justify-content: center;
@@ -10,6 +10,7 @@
     width: 100vw;
     display: grid;
     grid-template-columns: 4fr 1fr;
+    
 }
 
 .notes {
@@ -26,13 +27,10 @@
     width: 100%;
 }
 
-.confirm button {
-    width: 75%;
-}
-
 textarea {
     width: 100%;
     height: 100%;
+    font-size: 1.2rem;
     resize: none;
 }
 
@@ -52,16 +50,24 @@ textarea {
     text-align: center;
 }
 
-
-
-
 .end label {
     text-align: center;
     align-content: center;
+    transform: translate(-11%, 50%);
+    color: white;
     height: 45%;
+    line-height: 40%;
 }
 
-.star {
+.favorite {
+    margin-left: -10px;
+}
+
+.favorite span {
+    font-size: 1.9rem;
+}
+
+/* .star {
     position: relative;
     display: inline-block;
     width: 0;
@@ -76,7 +82,7 @@ textarea {
     border-left:   .3em solid transparent;
 
     /* Controlls the size of the stars. */
-    font-size: 24px;
+    /*font-size: 24px;
 }
     .star:before, .star:after {
     content: '';
@@ -106,13 +112,23 @@ textarea {
 
     .fav:before, .fav:after {
         border-bottom: .7em  solid #F80;
-    }
-
-    .favorite {
-        display: inline-block;
-        justify-self: flex-end;
-        color: black;
-        height: 20%;
+    } */
+    @media only screen and (min-width: 1024px) {
+        .notes {
+            width: 70vw;
+        }
+    
+        .confirm {
+            width: 70%;
+        }
+    
+        textarea {
+            width: 90%;
+        }
+    
+        .end {
+            width: 15vw;
+        }
     }
 
 @media only screen and (max-width: 767px) {
@@ -120,15 +136,23 @@ textarea {
         height: 15vh;
     }
 
-    .end label {
-        height: 30%;
-        line-height: 40%;
+    .personal button {
+        height: 20%;
     }
+
     .favorite span {
         font-size: 2rem;
     }
     
-    .end button {
-        height: 40%;
+}
+
+@media only screen and (max-width: 700px) {
+    textarea {
+        width: 90%;
+    }
+
+    .end {
+        margin-right: 20px;
     }
 }
+

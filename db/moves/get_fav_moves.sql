@@ -1,0 +1,1 @@
+SELECT m.* FROM MOVES m JOIN notes n ON m.id = n.move_id WHERE n.favorite = true AND n.user_id = $1

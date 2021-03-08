@@ -19,6 +19,7 @@ const Personal = () => {
     // console.log('pers', personalReducer.notes);
     useEffect(() => {
         axios.get(`/api/notes/${moveReducer.id}`).then(res => {
+            console.log(res.data)
             dispatch(updateNotes(res.data))
         }).catch(err => console.log(err));
     }, [moveReducer.id, authReducer]);
@@ -72,11 +73,11 @@ const Personal = () => {
                     <button onClick={updateNote}>Save</button>
                     <button onClick={undo}>Undo</button>
                 </section>
-                <textarea value={notes} onChange={e => setNotes(e.target.value)}  />
+                <textarea value={notes} onChange={e => setNotes(e.target.value)} />
             </div>
             <div className='end'>
                 <label className='favorite'>Favorite:  <span onClick={saveFavorite} style={style} >&#9733;</span></label>
-                <button onClick={e => setOpenNotes(!openNotes)}>{openNotes ? 'close' : 'open'}</button>
+                <button onClick={e => setOpenNotes(!openNotes)}>{openNotes ? 'Close' : 'Open'}</button>
             </div>
         </section>
     )

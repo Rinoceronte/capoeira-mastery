@@ -12,11 +12,14 @@
 
 
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   color: black;
   height: 100vh;
   width: 100vw;
   overflow-y: hidden;
+  font-size: 1.3rem;
 }
 
 * {
@@ -26,44 +29,81 @@
 
 body {
   overflow: hidden;
-  background: rgb(233, 227, 227);
+  background: rgb(229, 229, 245);
 }
 
 header {
   width: 100vw;
-  background: #000049;
+  background: #002776;
   height: 8vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
+.home {
+  color: #ffdf00;
+}
+
 header h1 {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   color: white;
+  width: 100%;
 }
 
 header a {
-  width: 10vw;
+  width: 70vw;
   text-decoration: none;
 }
 
 .content {
   width: 100vw;
-  height: 90vh;
+  height: 70vh;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 60vh;
 }
 
 .collapse {
   display: none !important;
 }
 
+.profileform {
+  height: 50vh;
+  display: grid;
+  grid-template-rows: 16% 16% 16% 16% 16% 16%;
+}
+
+.profileform .row {
+  justify-items: center;
+}
+
+.profileform input {
+  text-align: center;
+}
+
+/* .profileform .row {
+  display: grid;
+  grid-template-rows: 50% 50%;
+
+} */
+
+@media only screen and (max-width: 1024px) {
+
+}
+
 @media only screen and (max-width: 767px) {
   .App {
-    display: flex;
-    flex-direction: column;
+    
     align-items: center;
+    font-size: 1rem;
   }
 
   .content {
@@ -71,9 +111,15 @@ header a {
     align-items: center;
   }
 
-  .main {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
+  header a {
+    font-size: 1.1em;
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+  header a {
+    font-size: 0.7em;
   }
 }
+

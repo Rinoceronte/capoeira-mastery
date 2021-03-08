@@ -2,11 +2,16 @@
     justify-self: flex-end;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     width: 20vw;
 }
 
+.auth svg{
+    vertical-align: middle;
+}
+
 .auth button {
-    width: 30%;
+    vertical-align: middle;
 }
 
 
@@ -19,32 +24,37 @@
 }
 
 .loginform {
-    background: #52ce69;
+    background: rgb(255, 255, 255);
     display: grid;
     grid-template-rows: 10% 13% 13% 13% 13% 13% 13% 13%;
     position: absolute;
+    transform: translate(0, 5%);
     height: 70vh;
-    width: 60vw;
+    width: 20vw;
     z-index: 5;
     top: 40px;
     left: 40%;
     color: black;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 button {
     align-self: center;
 	background:linear-gradient(to bottom, #ffdf00 5%, #c7ae00 100%);
-	border-radius:6px;
+	border-radius: 10px;
     border: none;
 	display:inline-block;
 	cursor:pointer;
 	color:black;
 	font-family:Arial;
-	font-size:15px;
+	font-size: 1.2rem;
 	font-weight:bold;
-	padding:6px 14px;
-	text-decoration:none;
+	padding:0 8px;
     text-align: center;
+    vertical-align: middle;
+	text-decoration: none;
+    margin: auto;
 }
 
 button:hover {
@@ -56,12 +66,37 @@ button:active {
 	top:1px;
 }
 
+button span{
+    position: relative;
+    top: 50%;
+    transform: translate(-50%, 0);
+}
+
+.phone {
+    left: 50%;
+}
+
 .loginform button {
     margin: 0 auto;
 }
 
+.loginform.log {
+    height: 50vh;
+    grid-template-rows: 15% 30% 30%;
+}
+
+.form input {
+    width: 100%;
+    height: 60%;
+}
+
+input {
+    border-radius: 10px;
+}
+
 .close {
     /* position: absolute; */
+    justify-self: end;
     top: 10px;
     right: 10px;
     width: 40px;
@@ -76,7 +111,9 @@ button:active {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: 70% 30%;
+    justify-items: center;
 }
+
 .row label span {
     width: 20%;
 }
@@ -84,46 +121,197 @@ button:active {
 .row label {
     width: 70%;
     display: grid;
-    grid-template-rows: 30% 70%;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 70%;
+    justify-items: center;
+    font-size: 1rem;
 }
 
 .row input {
-    width: 35%;
     align-self: center;
-    line-height: 1.5rem;
+    border-radius: 10px;
+}
+
+.phone {
+    display: none;
+}
+
+.profile{
+    width: 1.4em !important;
+    height: 1.4em !important;
+    color: #ffdf00;
 }
 
 
+
+.row label span {
+    text-align: start;
+    line-height: 20%;
+    width: 100%;
+}
+
+.form input {
+    width: 100%;
+    height: 60%;
+    line-height: 70%;
+}
+
+.wrong {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.8rem;
+    line-height: 20%;
+}
+
 @media only screen and (max-width: 767px) {
 
+    .loginform {
+        transform: translate(-35%, 10%);
+    }
 
-    .wrong {
-        position: relative;
-        bottom: 0;
-        width: 100%;
-        font-size: 0.8rem;
-        line-height: 20%;
+    .loginform.log {
+        height: 40vh;
+        margin-top: 3%;
+    }
+
+    .loginform.log input {
+        height: 1.2em;
+    }
+
+
+    .close {
+        font-size: 1.2em;
+        color: #8d8d92;
     }
 
     .row label {
         font-size: 0.8rem;
         width: 100%;
-        grid-template-columns: 1fr;
-        grid-template-rows: 20% 60%;
     }
 
     .row label span {
         text-align: start;
         line-height: 20%;
-        width: 100%;
+        width: 80%;
     }
 
     .form input {
-        width: 100%;
         line-height: 70%;
+        width: 80%;
     }
 
     .loginform button {
         width: 50%;
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; */
+    }
+    .computer {
+        display: none;
+    }
+
+    .phone{
+        display: inline-block;
+    }
+
+    .auth button {
+        width: 40%;
+        height: 50%;
+        border-radius: 10px;
+        text-align: start;
+    }
+
+    .auth .logout {
+        width: 80%;
+    }
+
+    .loginform button {
+        height: 2.2em;
+    }
+
+}
+
+@media only screen and (max-width: 408px) {
+    button {
+        font-size: 0.7rem;
+    }
+
+    .form input {
+        width: 80%;
+    }
+
+    .wrong {
+        margin-top: -5%;
+        line-height: 80%;
     }
 }
+
+    @media only screen and (max-width: 1024px) {
+        .loginform {
+            width: 40vw;
+            transform: translate(-20%, 5%);
+        }
+    }
+
+    /* .App {
+        font-size: 2rem;
+    }
+
+    .wrong {
+        position: relative;
+        text-align: start;
+        bottom: 0;
+        width: 100%;
+        font-size: 1.5rem;
+        line-height: 20%;
+    }
+
+    button {
+        font-size: 1.5rem;
+        height: 2.2em;
+    }
+
+    .auth button {
+        width: 75%;
+        margin: 5px;
+        font-size: 1.5rem;
+        height: 2.2em;
+    }
+
+    .home {
+        height: 2.2em !important;
+        width: 2.2em !important;
+    }
+
+    .profile {
+        height: 2.2em !important;
+        width: 2.2em !important;
+    }
+
+    .auth .logout {
+        height: 2.2em;
+    }
+
+    .row {
+        grid-template-columns: 100%;
+        grid-template-rows: 85% 30%;
+        justify-items: center;
+    }
+
+    .row label{
+        width: 100%;
+    }
+
+    .loginform {
+        width: 50vw;
+        justify-content: center;
+        justify-items: end;
+    }
+
+    .row label input {
+        width: 100%;
+    }
+
+    .row label span {
+        width: 100%;
+    }
+} */

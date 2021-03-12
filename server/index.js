@@ -6,6 +6,7 @@ const authCtrl = require('./controllers/authController');
 const moveCtrl = require('./controllers/moveController');
 const userCtrl = require('./controllers/userController');
 const auth = require('./middleware/authMiddleware');
+const path = require('path');
 
 const app = express();
 
@@ -41,5 +42,11 @@ app.post('/api/moves/favorite/:id', auth.usersOnly, moveCtrl.favMove);
 
 app.post('/api/notes/:move', auth.usersOnly, userCtrl.addNotes);
 app.get('/api/notes/:move', userCtrl.getNotes);
+
+app.use(express.static(__dirname + '/../build'));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '../build/index.html'))
+});
 
 app.listen(SERVER_PORT, () => console.log(`running on ${SERVER_PORT}`));

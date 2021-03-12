@@ -6,6 +6,8 @@ import Dropzone from 'react-dropzone';
 import {v4 as randomString} from 'uuid';
 import {useHistory} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import { LensTwoTone } from '@material-ui/icons';
 
 const User = () => {
 
@@ -33,7 +35,8 @@ const User = () => {
     }, []);
 
     const checkPassword = () => {
-        var reg = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}~_+-=|]).{8,32}$");
+        const reg = new RegExp(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/);
+        console.log(newPass, reg.test('aaaaBBB12#$%'));
         return reg.test(newPass);
     }
 
@@ -53,12 +56,13 @@ const User = () => {
         let p = false;
         let vp = false;
         if(newPass !== ''){
+            console.log('check check')
             p = checkPassword();
             vp = comparePasswords();
         }
 
 
-        // console.log(f, l, p, vp, origPass !== '')
+        console.log(f, l, p, vp, origPass !== '', newPass === '');
         if((f && l && p && vp && origPass !=='') || newPass === '') {
             if(newPass === '') {
                 setErrors({first: !f, last: !f, orig: false, newPass: false, verPass: false});
@@ -83,6 +87,8 @@ const User = () => {
                 setSaving(false);
                 console.log(err);
             });
+        } else {
+            setErrors({first: !f, last: !f, orig: false, newPass: !p, verPass: !vp});
         }
     }
 
@@ -109,11 +115,17 @@ const User = () => {
     }
 
     return <div className='profileform'>
-        <section className='row'><label><span>First Name:</span> <input type='text' onChange={e => setFirst(e.target.value)} value={first} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> {first === '' && <p className='wrong'>Input a valid first name</p>}</section>
-        <section className='row'><label><span>Last Name:</span> <input type="text" onChange={e => setLast(e.target.value)} value={last} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> {last === '' && <p className='wrong'>Input a valid last name</p>}</section>
-        <section className='row'><label><span>Password:</span><input type="password" onChange={e => setOrigPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/> </label>{errors.orig && <p className='wrong'>Invalid password</p>}</section>
-        <section className='row'><label><span>New Password:</span> <input type='password' onChange={e => setNewPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> {errors.newPass && <p className='wrong'>Use a strong password</p>}</section>
-        <section className='row'><label><span>Verify Password:</span> <input type="password" onChange={e => setVerPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> {verPass === newPass ? <p className='wrong'></p> : <p className='wrong'>Passwords do not match</p>}</section>
+        {/* <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={open} onClose={() => setOpen(false)} message='Incorrect username or password.' autoHideDuration={2000}/> */}
+        <section className='row'><label><span>First Name:</span> <input type='text' onChange={e => setFirst(e.target.value)} value={first} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> 
+        {first === '' && <p className='wrong'>Input a valid first name</p>}</section>
+        <section className='row'><label><span>Last Name:</span> <input type="text" onChange={e => setLast(e.target.value)} value={last} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> 
+        {last === '' && <p className='wrong'>Input a valid last name</p>}</section>
+        <section className='row'><label><span>Password:</span><input type="password" onChange={e => setOrigPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/> </label>
+        {errors.orig && <p className='wrong'>Invalid password</p>}</section>
+        <section className='row'><label><span>New Password:</span> <input type='password' onChange={e => setNewPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> 
+        {errors.newPass && <p className='wrong'>Use a strong password</p>}</section>
+        <section className='row'><label><span>Verify Password:</span> <input type="password" onChange={e => setVerPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> 
+        {verPass === newPass ? <p className='wrong'></p> : <p className='wrong'>Passwords do not match</p>}</section>
         {/* <section className='row'><label><span>Profile Picture:</span> <input type="file" onChange={e => setPic(e.target.files[0])} /></label></section> */}
         <Dropzone
             onDropAccepted={([file]) => {setPic(file)}}
@@ -123,7 +135,7 @@ const User = () => {
                 <div 
                 {...getRootProps()}>
                 <input {...getInputProps()} />
-                {pic.name ? <p>{pic.name}</p> : <p>Drop files here, or click to select files</p>}
+                {pic.name ? <p>{pic.name}</p> : <p>Click or Drag to add a profile picture!</p>}
             </div>
             )}
         </Dropzone>

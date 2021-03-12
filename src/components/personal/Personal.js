@@ -77,7 +77,7 @@ const Personal = () => {
             </div>
             <div className='end'>
                 <label className='favorite'>Favorite:  <span onClick={saveFavorite} style={style} >&#9733;</span></label>
-                <button onClick={e => setOpenNotes(!openNotes)}>{openNotes ? 'Close' : 'Open'}</button>
+                <button onClick={e => setOpenNotes(!openNotes)}>{openNotes ? 'Close' : 'Edit Notes'}</button>
             </div>
         </section>
     )

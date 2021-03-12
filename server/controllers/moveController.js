@@ -28,19 +28,32 @@ const getMove = async (req, res) => {
 
 }
 
-const favMove = (req, res) => {
+const favMove = async (req, res) => {
     let db = req.app.get('db');
     console.log('fav');
 
     const move_id = +req.params.id;
     const {newFav} = req.body;
     const user_id = req.session.user.id;
-    const results = db.moves.favMove([user_id, move_id, newFav]).then(_ => {
-        return res.sendStatus(201);
-    }).catch(err => {
-        console.log(err);
-        res.sendStatus(500);
-    }); 
+    let [notes] = await (db.user.find_note([user_id, move_id]));
+    if(notes){
+        db.moves.favMove([user_id, move_id, newFav]).then(_ => {
+            return res.sendStatus(200);
+        }).catch(err => {
+            console.log(err);
+            return res.sendStatus(500);
+        });
+    }
+    else {
+        db.user.add_note([user_id, move_id, '']).then(_ => {
+            db.moves.favMove([user_id, move_id, newFav]).then(_ => {
+                return res.sendStatus(200)
+            })
+        }).catch(err => {
+            console.log(err);
+            return res.sendStatus(500);
+        })
+    }
 }
 
 

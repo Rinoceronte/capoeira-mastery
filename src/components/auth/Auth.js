@@ -1,6 +1,6 @@
 import './auth.css';
 import {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateUser, logout} from './state/actions';
 import {updateNotes} from '../personal/state/actions';
@@ -9,6 +9,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Snackbar from '@material-ui/core/Snackbar';
+import Avatar from '@material-ui/core/Avatar';
+import HomeIcon from '@material-ui/icons/Home';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
@@ -17,6 +19,7 @@ const Auth = () => {
     // const [loggedinuser, setLoggedInUser] = useState({});
     const userInfo = useSelector(({authReducer}) => authReducer);
     const dispatch = useDispatch();
+    const location = useLocation();
     // const {push} = useHistory();
     // console.log(userInfo);
     const [trylogin, setTryLogin] = useState(false);
@@ -24,16 +27,17 @@ const Auth = () => {
     const [user, setUser] = useState({username: '', password: '', verpassword: '', first_name: '', last_name: '', email: ''})
     const [regErrors, setRegErrors] = useState({username: false, password: false, verpassword: false, first: false, last: false, email: false});
     const [open, setOpen] = useState(false);
+    const [saving, setSaving] = useState(false);
 
 
 
     useEffect(() => {
         axios.get('api/auth/me').then(res => dispatch(updateUser(res.data))).catch(err => console.log(err));
+        // console.log(location.pathname);
     }, []);
 
     const checkEmail = () => {
         var pattern = new RegExp("^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$");
-
         return pattern.test(user.email);
     }
 
@@ -57,7 +61,7 @@ const Auth = () => {
     }
 
     const login = () => {
-        console.log('login')
+        // console.log('login')
         let u = checkUser();
         setRegErrors({username: !u, password: false, verpassword: false, first: false, last: false, email: false});
 
@@ -143,8 +147,17 @@ const Auth = () => {
             {userInfo.username == '' || !userInfo.username ? <section className='auth'>
                 <button onClick={e => {setTryLogin(!trylogin); setReg(false);}}><span className='phone'><VpnKeyIcon /></span><span className='computer'>Login</span></button>
                 <button onClick={e => {setReg(!reg); setTryLogin(false);}}><span className='phone'><HowToRegIcon /></span><span className='computer'>Register</span></button>
-            </section> : <section className="auth"><Link to="/"><button onClick={logout} className='logout' ><span className='phone'><ExitToAppIcon /></span><span className='computer'>Logout</span></button></Link> <Link to='/user'><AccountCircleIcon className='profile'/></Link></section>}
-            {trylogin && <div className='loginform log'>
+            </section> : <section className="auth">
+                <Link to="/"><button onClick={logout} className='logout' >
+                    <span className='phone'><ExitToAppIcon /></span><span className='computer'>Logout</span></button></Link> 
+                    {location.pathname === '/user' ? 
+                    <Link to="/" className="home-link"><HomeIcon className="home" /></Link> : 
+                    <Link to='/user'>
+                        {userInfo.profile_pic ? 
+                            <Avatar alt='profile_img' src={userInfo.profile_pic}/> : 
+                            <AccountCircleIcon className='profile'/>}
+                    </Link>}</section>
+            }{trylogin && <div className='loginform log'>
                             <label className='close' onClick={e => {setTryLogin(false); setReg(false);}}>X</label>
                             <section className='user row'><label className='form'><span>Username: </span><input type='text' autoFocus onChange={e => alterUser('username', e.target.value)} value={user.username} onKeyPress={e => {if(e.key === 'Enter') {login()}}}/></label>
                             {user.username == '' ? <p className='wrong'>Input a username</p> : <p className='wrong'></p> }</section>

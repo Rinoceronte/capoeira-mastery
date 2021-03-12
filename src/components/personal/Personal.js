@@ -19,7 +19,7 @@ const Personal = () => {
     // console.log('pers', personalReducer.notes);
     useEffect(() => {
         axios.get(`/api/notes/${moveReducer.id}`).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             dispatch(updateNotes(res.data))
         }).catch(err => console.log(err));
     }, [moveReducer.id, authReducer]);

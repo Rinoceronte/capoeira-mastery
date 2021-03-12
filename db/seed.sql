@@ -2,7 +2,7 @@
 -- DROP TABLE IF EXISTS moves;
 -- DROP TABLE IF EXISTS favorites;
 
--- CREATE TABLE users (id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL, password VARCHAR NOT NULL, first_name VARCHAR(50), last_name VARCHAR(50), email VARCHAR(50) NOT NULL);
+-- CREATE TABLE users (id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL, password VARCHAR NOT NULL, first_name VARCHAR(50), last_name VARCHAR(50), email VARCHAR(50) NOT NULL, profile_pic VARCHAR);
 
 -- CREATE TABLE moves (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, video VARCHAR NOT NULL, description VARCHAR NOT NULL);
 

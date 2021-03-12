@@ -8,6 +8,6 @@ export const updateUser = (user) => {
 export const logout = () => {
     return {
         type: 'LOGOUT',
-        payload: {username: '', first_name: '', last_name: '', email: ''}
+        payload: {username: '', first_name: '', last_name: '', email: '', profile_pic: ''}
     }
 }

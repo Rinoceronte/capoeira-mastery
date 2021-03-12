@@ -81,7 +81,7 @@ return (
         <div className={`moves ${open ? 'list' : 'closed-list' }`}>
             <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'left'}} open={error} onClose={() => setError(false)} message='You must be logged in to do that action' autoHideDuration={1000}/>
             {open ? <MenuOpenIcon onClick={() => setOpen(false)} className="menu"/> : <MenuIcon onClick={() => setOpen(true)} className="menu"/>}
-                <label className='favorites'><span className='computer'>Favorites</span><span className='phone'>Favs</span> <input type="checkbox" value={favs} checked={favs} onClick={toggleFavs} /></label>
+                <label className='favorites'><span className='computer'>Favorites</span><span className='phone'>Favs</span> <input type="checkbox" value={favs} checked={favs} onChange={toggleFavs} /></label>
 
                 <Slide direction="right" in={open} timeout={500} mountOnEnter unmountOnExit>
                     <TreeView

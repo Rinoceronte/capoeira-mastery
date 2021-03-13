@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import {v4 as randomString} from 'uuid';
 import {useHistory} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Tooltip from '@material-ui/core/Tooltip';
 import Snackbar from '@material-ui/core/Snackbar';
 import { LensTwoTone } from '@material-ui/icons';
 
@@ -123,7 +124,7 @@ const User = () => {
         <section className='row'><label><span>Password:</span><input type="password" onChange={e => setOrigPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/> </label>
         {errors.orig && <p className='wrong'>Invalid password</p>}</section>
         <section className='row'><label><span>New Password:</span> <input type='password' onChange={e => setNewPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> 
-        {errors.newPass && <p className='wrong'>Use a strong password</p>}</section>
+        {errors.newPass && <Tooltip title="1 lowercase letter 1 capital letter 1 number 1 special character, 8-16 characters" placement="top"><p className='wrong'>Use a strong password</p></Tooltip>}</section>
         <section className='row'><label><span>Verify Password:</span> <input type="password" onChange={e => setVerPass(e.target.value)} onKeyPress={e => {if(e.key === 'Enter') {update()}}}/></label> 
         {verPass === newPass ? <p className='wrong'></p> : <p className='wrong'>Passwords do not match</p>}</section>
         {/* <section className='row'><label><span>Profile Picture:</span> <input type="file" onChange={e => setPic(e.target.files[0])} /></label></section> */}

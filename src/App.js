@@ -7,6 +7,7 @@ import User from './components/User';
 import HomeIcon from '@material-ui/icons/Home';
 import {Switch, Route, Link} from 'react-router-dom';
 import Routes from './Routes';
+import About from './components/About';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Link to='/'><h1>Capoeira Mastery</h1></Link>
             <Auth />
           </header>
+          {/* <About /> */}
         <div className='content'>
             <Switch>
               <Route path='/' exact>

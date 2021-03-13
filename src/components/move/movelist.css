@@ -9,7 +9,7 @@
 .list ul {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 }
 
 li {
@@ -68,6 +68,10 @@ li {
         opacity: 1;
     }
 
+    .listFav {
+
+    }
+
     .MuiTreeView-root {
         margin-left: -50% !important;
     }
@@ -76,5 +80,10 @@ li {
 @media only screen and (max-width: 459px) {
     .MuiTreeItem-label {
         font-size: 0.6rem !important;
+    }
+
+    .listFav {
+        margin-left: 20px;
+        font-size: .7rem;
     }
 }

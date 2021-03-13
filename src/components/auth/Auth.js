@@ -13,6 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import HomeIcon from '@material-ui/icons/Home';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Auth = () => {
 
@@ -170,7 +171,7 @@ const Auth = () => {
                             <section className='user row'><label className='form'><span>Username:</span> <input type='text' autoFocus onChange={e => alterUser('username', e.target.value)} value={user.username} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {regErrors.username ? <span className='wrong'>Input a username</span> : <span className='wrong'></span>}</section>
                             <section className='pass row'><label className='form'><span>Password:</span> <input type='password' onChange={e => alterUser('password', e.target.value)} value={user.password} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
-                            {regErrors.password ? <span className='wrong'>Enter a strong password</span> : <span className='wrong'></span>}</section>
+                            {regErrors.password ? <Tooltip title="1 lowercase letter 1 capital letter 1 number 1 special character, 8-16 characters" placement="top"><span className='wrong'>Enter a strong password</span></Tooltip> : <span className='wrong'></span>}</section>
                             <section className='ver row'><label className='form'><span>Verify:</span> <input type='password' onChange={e => alterUser('verpassword', e.target.value)} value ={user.verpassword} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>
                             {comparePasswords() ? <span className='wrong'></span> : <span className='wrong'>Passwords do not match</span>}</section>
                             <section className='first row'><label className='form'><span>First Name:</span> <input type='text' onChange={e => alterUser('first_name', e.target.value)} value={user.first_name} onKeyPress={e => {if(e.key === 'Enter') {register()}}}/></label>

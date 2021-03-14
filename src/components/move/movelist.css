@@ -79,11 +79,11 @@ li {
 }
 @media only screen and (max-width: 459px) {
     .MuiTreeItem-label {
-        font-size: 0.6rem !important;
+        font-size: 0.7rem !important;
     }
 
     .listFav {
         margin-left: 20px;
-        font-size: .7rem;
+        font-size: .6rem;
     }
 }

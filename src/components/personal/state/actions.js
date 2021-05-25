@@ -1,3 +1,5 @@
+//controller file
+
 export const updateNotes = (notes) => {
     if(!notes.favorite){
         notes.favorite = false;
@@ -14,3 +16,4 @@ export const updateFavorite = (favorite) => {
         payload: {favorite}
     }
 }
+

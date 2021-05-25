@@ -1,3 +1,5 @@
+//model file
+
 const initialState = {
     notes: '',
     favorite: false

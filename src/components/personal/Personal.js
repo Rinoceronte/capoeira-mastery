@@ -1,3 +1,6 @@
+
+//view file
+
 import {useState, useEffect} from 'react';
 import './personal.css';
 import {useSelector, useDispatch} from 'react-redux';
